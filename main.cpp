@@ -39,7 +39,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int)
 	while (true)
 	{
 		// メッセージ処理
-		if (win->ProcessMessage()) {	break; }
+		if (win->ProcessMessage()) {break; }
 
 		// 入力関連の毎フレーム処理
 		input->Update();
