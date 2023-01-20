@@ -6,7 +6,7 @@
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
-
+ 
 #include <fstream>
 #include <sstream>
 #include <string>
