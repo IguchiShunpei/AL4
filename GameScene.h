@@ -6,6 +6,7 @@
 #include "Sprite.h"
 #include "Object3d.h"
 #include "DebugText.h"
+#include "CollisionPrimitive.h"
 
 /// <summary>
 /// ゲームシーン
@@ -54,12 +55,17 @@ public: // メンバ関数
 private: // メンバ変数
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
-	DebugText debugText;	
+	DebugText debugText;
 
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
 	Sprite* spriteBG = nullptr;
 	Object3d* object3d = nullptr;
+
+	//当たり判定 球
+	Sphere sphere;
+	//当たり判定 平面
+	Plane plane;
 };
 
