@@ -89,6 +89,65 @@ void GameScene::Update()
 
 	object3d->Update();
 
+#pragma region 球の当たり判定
+	// 球移動
+	//{
+	//	XMVECTOR moveY = XMVectorSet(0, 0.01f, 0, 0);
+	//	if (input->PushKey(DIK_8)) { sphere.center += moveY; }
+	//	else if (input->PushKey(DIK_2)) { sphere.center -= moveY; }
+
+	//	XMVECTOR moveX = XMVectorSet(0.01f, 0, 0, 0);
+	//	if (input->PushKey(DIK_6)) { sphere.center += moveX; }
+	//	else if (input->PushKey(DIK_4)) { sphere.center -= moveX; }
+	//}
+	//// stringstreamで変数の値を埋め込んで整形する
+	//std::ostringstream spherestr;
+	//spherestr << "Sphere:("
+	//	<< std::fixed << std::setprecision(2)  // 小数点以下２桁まで
+	//	<< sphere.center.m128_f32[0] << ","    //x
+	//	<< sphere.center.m128_f32[1] << ","    //y
+	//	<< sphere.center.m128_f32[2] << ")";   //z
+
+	//debugText.Print(spherestr.str(), 50, 180, 1.0f);
+
+	//// 球と平面の当たり判定
+	//XMVECTOR inter;
+	//bool hit = Collision::CheckSphere2Plane(sphere, plane, &inter);
+	//if (hit) {
+	//	debugText.Print("HIT", 50, 200, 1.0f);
+	//	// stringstreamをリセットし、交点座標を埋め込む
+	//	spherestr.str("");
+	//	spherestr.clear();
+	//	spherestr << "("
+	//		<< std::fixed << std::setprecision(2)
+	//		<< inter.m128_f32[0] << ","
+	//		<< inter.m128_f32[1] << ","
+	//		<< inter.m128_f32[2] << ")";
+
+	//	debugText.Print(spherestr.str(), 50, 220, 1.0f);
+	//}
+
+	//// 球と三角形の当たり判定
+	//XMVECTOR inter;
+	//bool hit = Collision::CheckSphere2Triangle(sphere, triangle, &inter);
+	//if (hit) {
+	//	debugText.Print("HIT", 50, 200, 1.0f);
+	//	// stringstreamをリセットし、交点座標を埋め込む
+	//	spherestr.str("");
+	//	spherestr.clear();
+	//	spherestr << "("
+	//		<< std::fixed << std::setprecision(2)
+	//		<< inter.m128_f32[0] << ","
+	//		<< inter.m128_f32[1] << ","
+	//		<< inter.m128_f32[2] << ")";
+
+	//	debugText.Print(spherestr.str(), 50, 220, 1.0f);
+	//}
+
+#pragma endregion
+
+#pragma region レイの当たり判定
+
 	// レイ移動
 	{
 		XMVECTOR moveZ = XMVectorSet(0, 0, 0.01f, 0);
@@ -109,23 +168,60 @@ void GameScene::Update()
 
 	debugText.Print(raystr.str(), 50, 180, 1.0f);
 
-	//レイと三角形の当たり判定
+	//// レイと平面の当たり判定
+	//XMVECTOR inter;
+	//float distance;
+	//bool hit = Collision::CheckRay2Plane(ray, plane, &distance, &inter);
+	//if (hit) {
+	//	debugText.Print("HIT", 50, 260, 1.0f);
+	//	// stringstreamをリセットし、交点座標を埋め込む
+	//	raystr.str("");
+	//	raystr.clear();
+	//	raystr << "("
+	//		<< std::fixed << std::setprecision(2)
+	//		<< inter.m128_f32[0] << ","
+	//		<< inter.m128_f32[1] << ","
+	//		<< inter.m128_f32[2] << ")";
+
+	//	debugText.Print(raystr.str(), 50, 280, 1.0f);
+	//}
+
+	////レイと三角形の当たり判定
+	//float distance;
+	//XMVECTOR inter;
+	//bool hit = Collision::CheckRay2Triangle(ray, triangle, &distance, &inter);
+	//if (hit) {
+	//	debugText.Print("HIT", 50, 220, 1.0f);
+	//	//stringsteamをリセットし、交点座標を埋め込む
+	//	raystr.str("");
+	//	raystr.clear();
+	//	raystr << "inter:(" << std::fixed << std::setprecision(2)
+	//		<< inter.m128_f32[0] << "," << inter.m128_f32[1] << "," << inter.m128_f32[2] << ")";
+	//	debugText.Print(raystr.str(), 50, 240, 1.0f);
+	//	raystr.str("");
+	//	raystr.clear();
+	//	raystr << "distance:(" << std::fixed << std::setprecision(2) << distance << ")";
+	//	debugText.Print(raystr.str(), 50, 260, 1.0f);
+	//}
+
+	//レイと球の当たり判定
 	float distance;
 	XMVECTOR inter;
-	bool hit = Collision::CheckRay2Triangle(ray, triangle, &distance, &inter);
+	bool hit = Collision::CheckRay2Sphere(ray, sphere, &distance, &inter);
 	if (hit) {
-		debugText.Print("HIT", 50, 220, 1.0f);
-		//stringsteamをリセットし、交点座標を埋め込む
+		debugText.Print("HIT", 50, 260, 1.0f);
+		//stringstreamをリセットし、交点座標を埋め込む
 		raystr.str("");
 		raystr.clear();
 		raystr << "inter:(" << std::fixed << std::setprecision(2)
 			<< inter.m128_f32[0] << "," << inter.m128_f32[1] << "," << inter.m128_f32[2] << ")";
-		debugText.Print(raystr.str(), 50, 240, 1.0f);
+		debugText.Print(raystr.str(), 50, 280, 1.0f);
 		raystr.str("");
 		raystr.clear();
 		raystr << "distance:(" << std::fixed << std::setprecision(2) << distance << ")";
-		debugText.Print(raystr.str(), 50, 260, 1.0f);
+		debugText.Print(raystr.str(), 50, 300, 1.0f);
 	}
+#pragma endregion
 }
 
 void GameScene::Draw()
