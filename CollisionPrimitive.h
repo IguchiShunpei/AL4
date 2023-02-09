@@ -17,6 +17,15 @@ struct Plane
 	//原点(0,0,0)からの距離
 	float distance = 0.0f;
 };
+//レイ
+struct Ray
+{
+	//始点座標
+	DirectX::XMVECTOR start = { 0,0,0,1 };
+
+	//方向
+	DirectX::XMVECTOR dir = { 1,0,0,0 };
+};
 
 //法線付き三角形(時計回りが表面)
 class Triangle
