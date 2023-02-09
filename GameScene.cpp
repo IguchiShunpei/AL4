@@ -37,6 +37,11 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 	spriteBG = Sprite::Create(1, { 0.0f,0.0f });
 	// 3Dオブジェクト生成
 	object3d = Object3d::Create();
+	//オブジェクトにモデルを紐付ける
+	object3d->SetModel(model);
+
+	object3d->SetPosition({ 0,0,200 });
+
 	object3d->Update();
 
 	// 球の初期値を設定

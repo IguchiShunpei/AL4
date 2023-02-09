@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Sprite.h"
 #include "Object3d.h"
+#include "model.h"
 #include "DebugText.h"
 #include "CollisionPrimitive.h"
 
@@ -62,6 +63,9 @@ private: // メンバ変数
 	/// </summary>
 	Sprite* spriteBG = nullptr;
 	Object3d* object3d = nullptr;
+
+	//OBJからモデルデータを読み込む
+	Model* model = Model::LoadFromOBJ("star");
 
 	//当たり判定 球
 	Sphere sphere;
