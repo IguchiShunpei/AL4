@@ -13,5 +13,8 @@ public:
 
 	//球と法線付き三角形の当たりチェック
 	static bool CheckSphere2Triangle(const Sphere& sphere, const Triangle& triangle, DirectX::XMVECTOR* inter = nullptr);
+
+	//レイと平面の当たり判定
+	static bool CheckRay2Plane(const Ray& ray, const Plane& plane, float* distance = nullptr, DirectX::XMVECTOR* inter = nullptr);
 };
 
