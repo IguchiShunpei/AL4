@@ -16,5 +16,8 @@ public:
 
 	//レイと平面の当たり判定
 	static bool CheckRay2Plane(const Ray& ray, const Plane& plane, float* distance = nullptr, DirectX::XMVECTOR* inter = nullptr);
+
+	//レイと法線付き三角形の当たり判定
+	static bool CheckRay2Triangle(const Ray& ray, const Triangle& triangle, float* distance = nullptr, DirectX::XMVECTOR* inter = nullptr);
 };
 

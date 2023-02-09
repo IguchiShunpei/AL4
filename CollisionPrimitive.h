@@ -37,6 +37,9 @@ public:
 	DirectX::XMVECTOR p2;
 	//法線ベクトル
 	DirectX::XMVECTOR normal;
+
+	//法線の計算
+	void ComputeNormal();
 };
 
 class CollisionPrimitive
