@@ -51,11 +51,13 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 	triangle.p0 = XMVectorSet(-1.0f, 0, -1.0f, 1);  //左手前
 	triangle.p1 = XMVectorSet(-1.0f, 0, +1.0f, 1);	//左奥
 	triangle.p2 = XMVectorSet(+1.0f, 0, -1.0f, 1);	//右手前
-	triangle.normal = XMVectorSet(0.0f, 1.0f, 0.0f, 0);  //上向き
+	triangle.normal = XMVectorSet(0.0f, 1.0f, 0.0f, 1);  //上向き
 
 	//レイの初期値を設定
 	ray.start = XMVectorSet(0, 1, 0, 1);//原点やや上
 	ray.dir = XMVectorSet(0, -1, 0, 0);//下向き
+
+
 }
 
 void GameScene::Update()
@@ -107,22 +109,22 @@ void GameScene::Update()
 
 	debugText.Print(raystr.str(), 50, 180, 1.0f);
 
-	// レイと平面の当たり判定
-	XMVECTOR inter;
+	//レイと三角形の当たり判定
 	float distance;
-	bool hit = Collision::CheckRay2Plane(ray, plane, &distance,&inter);
+	XMVECTOR inter;
+	bool hit = Collision::CheckRay2Triangle(ray, triangle, &distance, &inter);
 	if (hit) {
-		debugText.Print("HIT", 50, 260, 1.0f);
-		// stringstreamをリセットし、交点座標を埋め込む
+		debugText.Print("HIT", 50, 220, 1.0f);
+		//stringsteamをリセットし、交点座標を埋め込む
 		raystr.str("");
 		raystr.clear();
-		raystr << "("
-			<< std::fixed << std::setprecision(2)
-			<< inter.m128_f32[0] << ","
-			<< inter.m128_f32[1] << ","
-			<< inter.m128_f32[2] << ")";
-
-		debugText.Print(raystr.str(), 50, 280, 1.0f);
+		raystr << "inter:(" << std::fixed << std::setprecision(2)
+			<< inter.m128_f32[0] << "," << inter.m128_f32[1] << "," << inter.m128_f32[2] << ")";
+		debugText.Print(raystr.str(), 50, 240, 1.0f);
+		raystr.str("");
+		raystr.clear();
+		raystr << "distance:(" << std::fixed << std::setprecision(2) << distance << ")";
+		debugText.Print(raystr.str(), 50, 260, 1.0f);
 	}
 }
 
