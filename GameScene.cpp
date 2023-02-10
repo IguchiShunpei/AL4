@@ -67,38 +67,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 }
 
 void GameScene::Update() {
-	// オブジェクト移動
-	if (input->PushKey(DIK_UP) || input->PushKey(DIK_DOWN) || input->PushKey(DIK_RIGHT) || input->PushKey(DIK_LEFT)) {
-		// 現在の座標を取得
-		XMFLOAT3 position = object3d->GetPosition();
-		XMVECTOR moveY = XMVectorSet(0, 0.01f, 0, 0);
-
-		// 移動後の座標を計算
-		if (input->PushKey(DIK_UP)) 
-		{
-			position.y += 1.0f; 
-			sphere.center += moveY;
-		}
-		else if (input->PushKey(DIK_DOWN)) 
-		{ 
-			position.y -= 1.0f; 
-			sphere.center = moveY;
-		}
-		if (input->PushKey(DIK_RIGHT)) { position.x += 1.0f; }
-		else if (input->PushKey(DIK_LEFT)) { position.x -= 1.0f; }
-
-		// 座標の変更を反映
-		object3d->SetPosition(position);
-	}
-
-	// カメラ移動
-	if (input->PushKey(DIK_W) || input->PushKey(DIK_S) || input->PushKey(DIK_D) || input->PushKey(DIK_A)) {
-		if (input->PushKey(DIK_W)) { Object3d::CameraMoveVector({ 0.0f,+1.0f,0.0f }); }
-		else if (input->PushKey(DIK_S)) { Object3d::CameraMoveVector({ 0.0f,-1.0f,0.0f }); }
-		if (input->PushKey(DIK_D)) { Object3d::CameraMoveVector({ +1.0f,0.0f,0.0f }); }
-		else if (input->PushKey(DIK_A)) { Object3d::CameraMoveVector({ -1.0f,0.0f,0.0f }); }
-	}
-
 	//球の移動
 	{
 		XMFLOAT3 position = objSphere->GetPosition();
@@ -119,16 +87,6 @@ void GameScene::Update() {
 				isMove = false;
 			}
 		}
-
-		/*XMVECTOR moveX = XMVectorSet(0.01f, 0, 0, 0);
-		if (input->PushKey(DIK_RIGHT)) {
-			sphere.center += moveX;
-			position.x += 1.0f;
-		}
-		else if (input->PushKey(DIK_LEFT)) {
-			sphere.center -= moveY;
-			position.x -= 1.0f;
-		}*/
 
 		objSphere->SetPosition(position);
 	}
@@ -157,7 +115,7 @@ void GameScene::Update() {
 	}
 
 	if (isHit == true) {
-		modelSphere->SetColor(DirectX::XMFLOAT3(1, 0, 0));
+		modelSphere->SetColor(DirectX::XMFLOAT3(0, 1, 1));
 		isHit = false;
 	}
 	else {
