@@ -61,6 +61,8 @@ public://静的メンバ関数
 	//Deviceのsetter
 	static void SetDevice(ID3D12Device* device) { Model::device = device; }
 
+	void SetColor(DirectX::XMFLOAT3 color);
+
 private:
 	//デバイス(借りてくる)
 	static ID3D12Device* device;
