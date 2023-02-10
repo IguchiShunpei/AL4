@@ -403,3 +403,17 @@ void Model::Draw(ID3D12GraphicsCommandList* cmdList, UINT rootParamIndexMaterial
 	// 描画コマンド
 	cmdList->DrawIndexedInstanced((UINT)indices.size(), 1, 0, 0, 0);
 }
+
+void Model::SetColor(DirectX::XMFLOAT3 color) {
+	HRESULT result = S_FALSE;
+
+	// 定数バッファへデータ転送
+	ConstBufferDataB1* constMap1 = nullptr;
+	result = constBuffB1->Map(0, nullptr, (void**)&constMap1);
+	if (SUCCEEDED(result)) {
+		constMap1->ambient = color;
+		constMap1->diffuse = color;
+		constMap1->specular = color;
+		constBuffB1->Unmap(0, nullptr);
+	}
+}

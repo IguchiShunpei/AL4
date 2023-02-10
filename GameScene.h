@@ -64,8 +64,11 @@ private: // メンバ変数
 	Sprite* spriteBG = nullptr;
 	Object3d* object3d = nullptr;
 
-	//OBJからモデルデータを読み込む
-	Model* model = Model::LoadFromOBJ("star");
+	Model* modelSphere = nullptr;
+	Model* modelGround = nullptr;
+
+	Object3d* objSphere = nullptr;
+	Object3d* objGround = nullptr;
 
 	//当たり判定 球
 	Sphere sphere;
@@ -75,4 +78,7 @@ private: // メンバ変数
 	Triangle triangle;
 	//当たり判定 レイ
 	Ray ray;
+
+	bool isHit = false;
+	bool isMove = false;
 };
